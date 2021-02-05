@@ -11,7 +11,8 @@ const server = http.createServer(app)
 const io = socketio(server, {
   cors: {
     origin: "https://online-chat343.herokuapp.com",
-    credentials: true
+    // credentials: true,
+    methods: ["GET", "POST"]
   }
 })
 
