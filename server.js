@@ -8,7 +8,12 @@ const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('./utils/u
 
 const app = express()
 const server = http.createServer(app)
-const io = socketio('https://online-chat343.herokuapp.com')
+const io = socketio(server, {
+  cors: {
+    origin: "https://online-chat343.herokuapp.com",
+    credentials: true
+  }
+})
 
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')))
@@ -66,5 +71,5 @@ io.on('connection', socket => {
 
 })
 
-// const PORT = process.env.PORT || 3000
-// server.listen(PORT, () => console.log(`Server running on ${PORT} port`))
+const PORT = process.env.PORT || 3000
+server.listen(PORT, () => console.log(`Server running on ${PORT} port`))
